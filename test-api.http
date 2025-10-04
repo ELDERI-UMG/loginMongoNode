@@ -1,0 +1,54 @@
+### API REST - Sistema de Login
+### Usa la extensión REST Client de VS Code para ejecutar estas peticiones
+
+@baseUrl = http://localhost:4000
+@token = 
+
+### 1. Registrar un nuevo usuario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@ejemplo.com",
+  "password": "123456",
+  "role": "user"
+}
+
+### 2. Login (copiar el token de la respuesta)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@ejemplo.com",
+  "password": "123456"
+}
+
+### 3. Listar todos los usuarios (requiere token)
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### 4. Crear un nuevo usuario (requiere token)
+POST {{baseUrl}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "nuevo@ejemplo.com",
+  "password": "password123",
+  "role": "admin"
+}
+
+### 5. Actualizar usuario (cambiar :id por el ID real)
+PUT {{baseUrl}}/users/:id
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "actualizado@ejemplo.com",
+  "role": "admin",
+  "password": "nueva_password"
+}
+
+### 6. Eliminar usuario (cambiar :id por el ID real)
+DELETE {{baseUrl}}/users/:id
+Authorization: Bearer {{token}}
